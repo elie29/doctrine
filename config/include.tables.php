@@ -8,6 +8,8 @@
 return [
     '^T_CATEGORIE$',
     'T_CAMPAGNE$',
+    'T_COMPETENCE$',
+    'T_EMAIL$',
     // 'another_table_name',
     // '.*some_sub_portion.*',
     // '^some_table_prefix_.*',
