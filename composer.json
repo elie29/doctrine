@@ -1,0 +1,28 @@
+{
+    "name": "Doctrine",
+    "description": "Doctrine demo project",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Elie NEHME",
+            "email": "elie29@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^7.1",
+        "symfony/var-dumper": "^4.0",
+        "doctrine/orm": "^2.6"
+    },
+    "autoload": {
+        "psr-4": {
+            "": "src/"
+        }
+    },
+    "scripts": {
+        "serve": "php -S localhost:8000 -d display_errors=1 -t public"
+    },
+    "config": {
+        "process-timeout": 9000
+    }
+}
