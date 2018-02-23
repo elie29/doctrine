@@ -1,4 +1,5 @@
 <?php
+use App\Demo\Entity\TCampagne;
 
 /**
  * Application front controller
@@ -11,4 +12,8 @@ chdir(BE_PATH);
 require 'vendor/autoload.php';
 require 'config/bootstrap.php';
 
-dump($entityManager);
+$campagne = $entityManager->getRepository(TCampagne::class);
+dump($campagne->find(221), $campagne->find(1542));
+
+// ------------------------- LOG ALL QUERIES ---------------------
+dump($entityManager->getConfiguration()->getSQLLogger()->queries);
