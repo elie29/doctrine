@@ -1,5 +1,7 @@
 <?php
-use App\Demo\Entity\TCampagne;
+
+use App\Demo\Service\DemoServiceCampagne;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Application front controller
@@ -12,8 +14,14 @@ chdir(BE_PATH);
 require 'vendor/autoload.php';
 require 'config/bootstrap.php';
 
-$campagne = $entityManager->getRepository(TCampagne::class);
-dump($campagne->find(221), $campagne->find(1542));
+call_user_func(function(EntityManagerInterface $em) {
+
+    $demo = new DemoServiceCampagne($em);
+    dump($demo->getCampagne(221), $demo->getCampagne(1258));
+    dump($demo->getActifCampagneOrderByCategorie());
+    dump($demo->getActifCampagneOrderByMagicCall());
+
+}, $entityManager);
 
 // ------------------------- LOG ALL QUERIES ---------------------
 dump($entityManager->getConfiguration()->getSQLLogger()->queries);
