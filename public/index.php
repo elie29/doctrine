@@ -4,6 +4,7 @@ use App\Demo\Service\DemoServiceCampagne;
 use App\Demo\Service\DemoServiceCompetence;
 use App\Demo\Service\DemoServiceEmail;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Demo\Entity\TCategorie;
 
 /**
  * Application front controller
@@ -24,6 +25,12 @@ call_user_func(function(EntityManagerInterface $em) {
     dump($demo->getActifCampagneOrderByCategorie());
     dump($demo->getActifCampagneOrderByMagicCall());
     dump($demo->save('Mit elam harot'));
+    $date = DateTime::createFromFormat('Y-m-d', '2012-05-05');
+    dump($demo->getUpdatedCampagne($date));
+    dump($demo->updateCampagne(221, $date));
+
+    dump('DemoServiceCategorie');
+    dump($em->getRepository(TCategorie::class)->joinWithCompetence());
 
     dump('DemoServiceCompetence');
     $demo = new DemoServiceCompetence($em);
@@ -33,6 +40,7 @@ call_user_func(function(EntityManagerInterface $em) {
     dump('DemoServiceEmail');
     $demo = new DemoServiceEmail($em);
     dump($demo->save(158, 0, 'fr', 'Lorem metar engriv'));
+    dump($demo->emailFound(6), $demo->emailFound(6)); // Query executed once
 
 }, $entityManager);
 

@@ -34,5 +34,11 @@ class DemoServiceEmail
         $repo = new EmailRepository($this->em);
         return $repo->create($id, $perso, $langue, $description);
     }
+
+    public function emailFound(int $id)
+    {
+        $repo = new EmailRepository($this->em);
+        return $repo->existEmailById($id);
+    }
 }
 

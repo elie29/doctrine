@@ -2,7 +2,9 @@
 namespace App\Demo\Repository;
 
 use App\Demo\Entity\TCategorie;
+use App\Demo\Entity\TCompetence;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 
 class CategorieRepository extends EntityRepository
 {
@@ -17,5 +19,26 @@ class CategorieRepository extends EntityRepository
         return $categorie;
     }
 
+    public function joinWithCompetence(): array
+    {
+        /*
+         * Expr\Join::ON n'existe pas en DQL, il faut utilsier WITH !!
+         * With EntityRepository from and select are not required, because createQueryBuilder
+         * is a shortcut to select(c)->from(className)
+         */
+        $qb = $this->createQueryBuilder('c');
+
+        $query = $qb
+            ->leftJoin(TCompetence::class, 'co', Join::WITH, 'co.idCategorie = c.idCategorie')
+            ->where('c.actif = :actif')
+            ->andWhere('c.refTable = :ref')
+            ->setParameter('actif', 1)
+            ->setParameter('ref', 'MISSION')
+            ->setFirstResult(1)
+            ->setMaxResults(10)
+            ->getQuery();
+
+        return $query->getArrayResult();
+    }
 }
 

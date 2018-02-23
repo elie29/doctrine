@@ -31,5 +31,21 @@ class EmailRepository
 
         return $email;
     }
+
+    public function existEmailById($id): bool
+    {
+        $qb = $this->em->createQueryBuilder();
+
+        $res = $qb
+            ->select('count(e)')
+            ->from(TEmail::class, 'e')
+            ->where('e.identifiant=:id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->useResultCache(true, 5, 'cache.id.existEmailById-' . $id) // cache result for 5 seconds
+            ->getSingleScalarResult();
+
+        return (int) $res >= 1;
+    }
 }
 

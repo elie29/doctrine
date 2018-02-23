@@ -43,5 +43,15 @@ class DemoServiceCampagne
     {
         return $this->repo->create($description);
     }
+
+    public function getUpdatedCampagne(\DateTime $date)
+    {
+        return $this->repo->findCampagne($date);
+    }
+
+    public function updateCampagne(int $id, \DateTime $date)
+    {
+        return $this->repo->update($id, $date);
+    }
 }
 
