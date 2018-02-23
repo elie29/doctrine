@@ -58,6 +58,24 @@ class EmailRepository
         return $query->execute();
     }
 
+    /**
+     * Using simple SQL language
+     */
+    public function delete(int $id): int
+    {
+        $conn = $this->em->getConnection();
+
+        /*
+         * $conn->delete|update|insert are not type safe
+         * use prepare is better
+         */
+        $stmt = $conn->prepare('DELETE FROM T_EMAIL WHERE IDENTIFIANT = :id');
+        $stmt->bindValue(':id', $id);
+        $stmt->execute();
+
+        return $stmt->rowCount();
+    }
+
     public function update(): bool
     {
         $entityManager = $this->em;

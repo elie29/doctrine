@@ -53,5 +53,10 @@ class DemoServiceCampagne
     {
         return $this->repo->update($id, $date);
     }
+
+    public function getMyCampagne(\DateTime $date)
+    {
+        return $this->repo->findCampagneWithRawSql($date);
+    }
 }
 

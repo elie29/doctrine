@@ -39,6 +39,18 @@ class CampagneRepository extends EntityRepository
         return $query->getArrayResult();
     }
 
+    public function findCampagneWithRawSql(DateTime $date): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        // Session date format related
+        return $conn->fetchAll(
+            'SELECT * FROM T_CAMPAGNE WHERE DATE_MAJ > :datemaj',
+            array(
+                ':datemaj' => $date->format(self::YMD)
+            )
+        );
+    }
+
     public function update(int $id, DateTime $date): int
     {
         $qb = $this->createQueryBuilder('c');

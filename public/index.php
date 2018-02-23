@@ -28,6 +28,7 @@ call_user_func(function(EntityManagerInterface $em) {
     $date = DateTime::createFromFormat('Y-m-d', '2012-05-05');
     dump($demo->getUpdatedCampagne($date));
     dump($demo->updateCampagne(221, $date));
+    dump($demo->getMyCampagne($date));
 
     dump('DemoServiceCategorie');
     dump($em->getRepository(TCategorie::class)->joinWithCompetence());
@@ -43,6 +44,7 @@ call_user_func(function(EntityManagerInterface $em) {
     dump($demo->save(158, 0, 'fr', 'Lorem metar engriv'));
     dump($demo->emailFound(6), $demo->emailFound(6)); // Query executed once
     dump($demo->deleteId(55));
+    dump($demo->delete(55));
     dump($demo->update());
 
 }, $entityManager);

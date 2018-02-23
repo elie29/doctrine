@@ -47,6 +47,12 @@ class DemoServiceEmail
         return $repo->deleteById($id);
     }
 
+    public function delete(int $id)
+    {
+        $repo = new EmailRepository($this->em);
+        return $repo->delete($id);
+    }
+
     public function update()
     {
         $repo = new EmailRepository($this->em);
