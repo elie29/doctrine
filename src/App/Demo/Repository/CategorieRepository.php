@@ -40,5 +40,19 @@ class CategorieRepository extends EntityRepository
 
         return $query->getArrayResult();
     }
+
+    public function joinWithCompetenceDQL(): array
+    {
+        $query = $this->getEntityManager()->createQuery(
+            'SELECT c.actif, c.idCategorie FROM App\Demo\Entity\TCategorie c ' .
+            'LEFT JOIN App\Demo\Entity\TCompetence co WITH co.idCategorie = c.idCategorie '.
+            'WHERE c.actif = :actif AND c.refTable = :ref'
+        )
+        ->setParameter('actif', 1)
+        ->setParameter('ref', 'MISSION')
+        ->setMaxResults(10);
+
+        return $query->getArrayResult();
+    }
 }
 

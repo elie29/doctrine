@@ -31,6 +31,7 @@ call_user_func(function(EntityManagerInterface $em) {
 
     dump('DemoServiceCategorie');
     dump($em->getRepository(TCategorie::class)->joinWithCompetence());
+    dump($em->getRepository(TCategorie::class)->joinWithCompetenceDQL());
 
     dump('DemoServiceCompetence');
     $demo = new DemoServiceCompetence($em);
@@ -41,6 +42,8 @@ call_user_func(function(EntityManagerInterface $em) {
     $demo = new DemoServiceEmail($em);
     dump($demo->save(158, 0, 'fr', 'Lorem metar engriv'));
     dump($demo->emailFound(6), $demo->emailFound(6)); // Query executed once
+    dump($demo->deleteId(55));
+    dump($demo->update());
 
 }, $entityManager);
 

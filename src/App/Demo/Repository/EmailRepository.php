@@ -47,5 +47,26 @@ class EmailRepository
 
         return (int) $res >= 1;
     }
+
+    public function deleteById(int $id): bool
+    {
+        $entityManager = $this->em;
+        $query = $entityManager->createQuery(
+            'DELETE App\Demo\Entity\TEmail e WHERE e.identifiant = :id'
+        );
+        $query->setParameter('id', $id);
+        return $query->execute();
+    }
+
+    public function update(): bool
+    {
+        $entityManager = $this->em;
+        $query = $entityManager->createQuery(
+            'UPDATE App\Demo\Entity\TEmail e SET e.description = :desc WHERE e.identifiant = :id'
+        );
+        $query->setParameter('desc', 'lorem ipsum');
+        $query->setParameter('id', 55);
+        return $query->execute();
+    }
 }
 
