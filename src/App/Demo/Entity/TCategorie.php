@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @codeCoverageIgnore
  *
  * @ORM\Table(name="T_CATEGORIE")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Demo\Repository\CategorieRepository")
  */
 class TCategorie
 {

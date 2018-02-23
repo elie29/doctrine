@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @codeCoverageIgnore
  *
  * @ORM\Table(name="T_CAMPAGNE")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\Demo\Repository\CampagneRepository")
  */
 class TCampagne
 {

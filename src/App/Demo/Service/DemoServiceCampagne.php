@@ -8,7 +8,7 @@ class DemoServiceCampagne
 {
 
     /**
-     * @var \Doctrine\ORM\EntityRepository
+     * @var \App\Demo\Repository\CampagneRepository
      */
     protected $repo;
 
@@ -36,8 +36,12 @@ class DemoServiceCampagne
         $order = ['idCampagne' => 'ASC'];
         $limit = 2;
         $offset = 1;
-        // Magic method
         return $this->repo->findByActif(1, $order, $limit, $offset);
+    }
+
+    public function save(string $description)
+    {
+        return $this->repo->create($description);
     }
 }
 
