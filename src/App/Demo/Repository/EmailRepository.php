@@ -48,7 +48,7 @@ class EmailRepository
         return (int) $res >= 1;
     }
 
-    public function deleteById(int $id): bool
+    public function deleteById(int $id): int
     {
         $entityManager = $this->em;
         $query = $entityManager->createQuery(
@@ -76,7 +76,7 @@ class EmailRepository
         return $stmt->rowCount();
     }
 
-    public function update(): bool
+    public function update(): int
     {
         $entityManager = $this->em;
         $query = $entityManager->createQuery(
